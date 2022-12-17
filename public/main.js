@@ -21,11 +21,7 @@ long long fib(int i) {
 */
 
 async function main() {
-    const response = await fetch("./test.wasm");
-    const buffer = await response.arrayBuffer();
-    const module = await WebAssembly.compile(buffer);
-    console.log(module);
-    const instance = await WebAssembly.instantiate(module);
+    const { instance } = await WebAssembly.instantiateStreaming(fetch("./test.wasm"));
     console.log(instance);
     const result = instance.exports.fib(5);
     console.log(result);
