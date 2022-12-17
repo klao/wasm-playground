@@ -1,0 +1,8 @@
+{
+  "name": "wasm-playground",
+  "type": "module",
+  "scripts": {
+    "build": "bash -c 'cd src && ./compile.sh'",
+    "clean": "bash -c 'rm -f public/*.wasm'"
+  }
+}
