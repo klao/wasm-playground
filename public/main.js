@@ -18,4 +18,11 @@ async function main() {
     console.log(array.slice(0, 32));
 }
 
+async function main2() {
+    const { instance } = await WebAssembly.instantiateStreaming(fetch("./add.wasm"));
+    console.log(instance);
+    console.log(instance.exports.add(1, 2));
+}
+
 main();
+main2();
