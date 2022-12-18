@@ -2,13 +2,12 @@
 
 extern "C" {
 
-int EMSCRIPTEN_KEEPALIVE add(int a, int b) {
-  return a + b;
-}
-
-long long EMSCRIPTEN_KEEPALIVE fib(int i) {
-  if (i <= 1) return i;
-  return fib(i-1) + fib(i-2);
+void EMSCRIPTEN_KEEPALIVE reverse(int *array, int size) {
+  for (int i = 0; i < size / 2; i++) {
+    int temp = array[i];
+    array[i] = array[size - i - 1];
+    array[size - i - 1] = temp;
+  }
 }
 
 }
