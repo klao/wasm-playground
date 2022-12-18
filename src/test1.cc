@@ -1,18 +1,14 @@
-#include <iostream>
+#include <emscripten.h>
 
 extern "C" {
 
-int add(int a, int b) {
+int EMSCRIPTEN_KEEPALIVE add(int a, int b) {
   return a + b;
 }
 
-long long fib(int i) {
+long long EMSCRIPTEN_KEEPALIVE fib(int i) {
   if (i <= 1) return i;
   return fib(i-1) + fib(i-2);
 }
 
 }
-
-// int main() {
-//     std::cout << "fib(10) = " << fib(10) << std::endl;
-// }
