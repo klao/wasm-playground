@@ -16,3 +16,10 @@
         )
     )
 )
+
+;; Results:
+;; Chrome: 13.8s
+;; Firefox: 8.5s
+;; Hand assembly: 5.3s
+;; C (gcc -O0): 9.3s
+;; C (gcc -O2): 2.6s
