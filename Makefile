@@ -1,4 +1,4 @@
-all: public/test1.wasm public/multi.wasm
+all: public/test1.wasm public/fib.wasm
 
 # TODO: actually test this in the browser
 public/%.wasm: src/%.c
