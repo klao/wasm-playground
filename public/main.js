@@ -19,9 +19,9 @@ async function main() {
 }
 
 async function main2() {
-    const { instance } = await WebAssembly.instantiateStreaming(fetch("./add.wasm"));
+    const { instance } = await WebAssembly.instantiateStreaming(fetch("./multi.wasm"));
     console.log(instance);
-    console.log(instance.exports.add(1, 2));
+    console.log(instance.exports.multi(2));
 }
 
 main();
