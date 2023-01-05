@@ -23,3 +23,5 @@
 ;; Hand assembly: 5.3s
 ;; C (gcc -O0): 9.3s
 ;; C (gcc -O2): 2.6s
+;; Chrome JS: 17s
+;; Firefox JS: 26s
