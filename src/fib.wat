@@ -18,8 +18,16 @@
 )
 
 ;; Results:
+;; Hand WASM:
 ;; Chrome: 13.8s
 ;; Firefox: 8.5s
+;; Clang -O3:
+;; Chrome: 9.5s
+;; Firefox: 6.3s
+;; Further hand optimized:
+;; Chrome: 8.9s
+;; Firefox: 6.1s
+;;
 ;; Hand assembly: 5.3s
 ;; C (gcc -O0): 9.3s
 ;; C (gcc -O2): 2.6s

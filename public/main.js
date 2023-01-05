@@ -37,10 +37,9 @@ function fiba(n) {
 }
 
 async function main2() {
-    const { instance } = await WebAssembly.instantiateStreaming(fetch("./fib.wasm"));
+    const { instance } = await WebAssembly.instantiateStreaming(fetch("./fib3.wasm"));
     console.log(instance);
 
-    /*
     console.time("fib40");
     console.log(instance.exports.fib(40));
     console.timeEnd("fib40");
@@ -48,8 +47,8 @@ async function main2() {
     console.time("fib45");
     console.log(instance.exports.fib(45));
     console.timeEnd("fib45");
-    */
 
+    /*
     console.time("fib40");
     console.log(fiba(40));
     console.timeEnd("fib40");
@@ -57,6 +56,7 @@ async function main2() {
     console.time("fib45");
     console.log(fiba(45));
     console.timeEnd("fib45");
+    */
 }
 
 main();

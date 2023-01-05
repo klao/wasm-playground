@@ -2,7 +2,8 @@ all: public/test1.wasm public/fib.wasm
 
 # TODO: actually test this in the browser
 public/%.wasm: src/%.c
-	clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o $@ $<
+	clang -O3 --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o $@ $<
+	chmod a-x $@
 
 public/%.wasm: src/%.cc
 	em++ -W -Wall -O2 $< -o $@ -s STANDALONE_WASM -s SIDE_MODULE=1 --no-entry
