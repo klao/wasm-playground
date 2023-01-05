@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Guessing with WASM</title>
+</head>
+
+<body>
+    <h1>Guessing with WASM</h1>
+    <p>A WebAssembly module has hidden a number from us. It's an integer between 1 and 100, can you guess it?</p>
+
+    <div id="convo"></div>
+
+    <form id="guessForm" action="">
+        <label for="guess">Your guess:</label>
+        <input type="number" id="guess" />
+        <input type="submit" value="Ask!" />
+    </form>
+
+    <script src="guess.js"></script>
+</body>
+
+</html>
