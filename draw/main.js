@@ -1,7 +1,8 @@
 "use strict";
 
 const params = new URLSearchParams(window.location.search);
-const pixelation = Number(params.get("pix")) || 1;
+// TODO: select pixelation based on screen size
+const pixelation = Number(params.get("pix")) || 2;
 console.log("pixelation", pixelation);
 
 
@@ -41,16 +42,29 @@ setTimeout(() => {
     console.log(document.getElementById("canvas").getBoundingClientRect());
 }, 1000);
 
+////////////////////////////////////////////
+
+const pageSize = 1 << 16;
+const memSize = Math.ceil(width * height * 4 / pageSize);
+const mem = new WebAssembly.Memory({ initial: memSize, maximum: 256
+    , shared: true });
+const memArray = new Uint8ClampedArray(mem.buffer, 0, width * height * 4);
+
+// We will not use the ArrayBuffer of this ImageData data directly, but always copy from the
+// shared one.
 const imageData = ctx.createImageData(width, height);
-const buf = imageData.data;
-const moire = 16;
-for (let i = 3, p = 0; i < buf.length; i += 4, ++p) {
-    if (p == moire) {
-        i += 4 * moire;
-        p = 0;
-    }
-    buf[i] = 255;
-}
+
+// Unfortunately, this requires quite a hassle to set up:
+// Passing SharedArrayBuffer to a worker is only allowed if some security headers are set
+// on the server. There is a workaround:
+// https://stefnotch.github.io/web/COOP%20and%20COEP%20Service%20Worker/
+//
+// For 'live server' in VS Code see:
+// https://github.com/ritwickdey/vscode-live-server/issues/657
+const worker = new Worker("worker.js");
+worker.postMessage({ mem, width, height });
+
+////////////////////////////////////////////
 
 let frames = 0;
 let startTime = 0;
@@ -63,6 +77,7 @@ function logFPS(frames, time) {
 }
 
 function draw(now) {
+    imageData.data.set(memArray);
     ctx.putImageData(imageData, 0, 0);
     requestAnimationFrame(draw);
     frames++;

@@ -12,6 +12,9 @@ public/%.wasm: src/%.cc
 public/%.wasm: src/%.wat
 	wat2wasm $< -o $@
 
+draw/%.wasm: src/%.wat
+	wat2wasm --enable-threads $< -o $@
+
 clean:
 	rm -f public/*.wasm
 
