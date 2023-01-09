@@ -1,0 +1,30 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #500;
+    position: relative;
+}
+
+.ui {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1em;
+    background-color: #fff5;
+}
