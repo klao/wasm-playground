@@ -1,29 +1,54 @@
 "use strict";
 
+const params = new URLSearchParams(window.location.search);
+const pixelation = Number(params.get("pix")) || 1;
+console.log("pixelation", pixelation);
+
 
 const canvas = document.getElementById("canvas");
 // TODO: experiment with anti-aliasing etc.
-const ctx = canvas.getContext("2d");
+// So far we have:
+//   antialias: definitely helps
+//   depth: doesn't seem to matter
+//   alpha: turning it off, but then drawing transparent pixels, makes it much worse (and weird)
+const ctx = canvas.getContext("2d", {
+    // alpha: false,
+    antialias: false,
+    // depth: false,
+});
 
 const rect = document.body.getBoundingClientRect();
 console.log(rect);
-// TODO: devicePixelRatio
+console.log(window.devicePixelRatio);
+const ourDPR = window.devicePixelRatio / pixelation;
 // Size that definitely fits and is a multiple of 16.
-const width = (rect.width - 1 | 0) & ~0xf;
-const height = (rect.height - 1 | 0) & ~0xf;
+// TODO: do we need the -0.5?
+const width = (((rect.width - 0.0) * ourDPR) | 0) & ~0xf;
+const height = (((rect.height - 0.0) * ourDPR) | 0) & ~0xf;
+const cssWidth = width / ourDPR;
+const cssHeight = height / ourDPR;
 
-// const width = 640;
-// const height = 480;
+document.getElementById("dpr").textContent = window.devicePixelRatio;
+document.getElementById("size").textContent = `${width}x${height}`;
 
 console.log(width, height);
 canvas.width = width;
 canvas.height = height;
-ctx.width = width;
-ctx.height = height;
+canvas.style.width = cssWidth + "px";
+canvas.style.height = cssHeight + "px";
+
+setTimeout(() => {
+    console.log(document.getElementById("canvas").getBoundingClientRect());
+}, 1000);
 
 const imageData = ctx.createImageData(width, height);
 const buf = imageData.data;
-for (let i = 3; i < buf.length; i += 4) {
+const moire = 16;
+for (let i = 3, p = 0; i < buf.length; i += 4, ++p) {
+    if (p == moire) {
+        i += 4 * moire;
+        p = 0;
+    }
     buf[i] = 255;
 }
 

@@ -13,9 +13,6 @@ html {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background-color: #500;
     position: relative;
@@ -27,4 +24,8 @@ body {
     right: 20px;
     padding: 1em;
     background-color: #fff5;
+}
+
+canvas {
+    image-rendering: pixelated;
 }
