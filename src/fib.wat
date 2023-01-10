@@ -33,3 +33,6 @@
 ;; C (gcc -O2): 2.6s
 ;; Chrome JS: 17s
 ;; Firefox JS: 26s
+;;
+;; Clang -O2: 3.3s
+;; Clang -O2 wasm-wasi / wasmtime: 7.6s
