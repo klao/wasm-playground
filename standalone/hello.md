@@ -38,4 +38,10 @@ The result is in [hello-simplified.wat](./hello-simplified.wat), size: 142 bytes
 We don't need to use const/store instructions to store in memory where our string is located
 and how long it is. We can bake it in as part of the `data`.
 
+Result size: 133 bytes
+
+We can make it even smaller if we target a different "version" of WASI, that is instead
+of `wasi_snapshot_preview1` we use `wasi_unstable`. This directly translates to saving
+another 9 bytes. I don't know how compatible this is, I only tested it with `wasmtime`.
+
 Result: [hello-overoptimized.wat](hello-overoptimized.wat), size: 133 bytes
